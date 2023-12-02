@@ -1,0 +1,4 @@
+2023-12-02 15:55:38: Status updated to Loan application 2 status updated from success , proceeding to amount disbursment to 'success , proceeding to amount disbursment' by Employee 1
+2023-12-02 16:06:52: Status updated to Loan application 2 status updated from success , proceeding to amount disbursment to 'amount disbursment ,  need customer at office' by Employee 1
+2023-12-02 16:15:20: Status updated to Loan application 6 status updated from Sent for Evaluation Team to 'Evaluation team awaiting for customer' by Employee 1
+2023-12-02 16:26:17: Status updated to Loan application 5 status updated from Application Intial Process draft to 'High amount rquested' by Employee 1

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add a New Bank</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flash-messages>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <h1>Add a New Bank</h1>
+    
+    <form id="addBankForm">
+        <label for="bankID">Bank ID:</label>
+        <input type="text" id="bankID" required><br>
+        
+        <label for="bankName">Bank Name:</label>
+        <input type="text" id="bankName" required><br>
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" required><br>
+        
+        <label for="emailaddress">Email Address:</label>
+        <input type="text" id="emailaddress" required><br>
+        
+        <label for="mobileno">Mobile Number:</label>
+        <input type="text" id="mobileno" required><br>
+        
+        <button type="button" onclick="addBank()">Add Bank</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        function addBank() {
+            // Implement the functionality to add a new bank.
+            // Use JavaScript to gather input and send data to the backend (e.g., via AJAX).
+            // Display the result in the "output" div.
+            var bankID = document.getElementById("bankID").value;
+            var bankName = document.getElementById("bankName").value;
+            var address = document.getElementById("address").value;
+            var emailaddress = document.getElementById("emailaddress").value;
+            var mobileno = document.getElementById("mobileno").value;
+
+            // Example: For demonstration purposes, show a success message.
+            var resultMessage = "New bank added: Bank ID=" + bankID + ", Name=" + bankName;
+            document.getElementById("output").innerHTML = resultMessage;
+        }
+    </script>
+</body>
+</html>

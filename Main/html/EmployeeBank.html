@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Banks to Employees</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flash-messages>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <!-- Include your navigation links here -->
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Map Banks to Employees</h2>
+
+        <!-- Bank-Employee Mapping Form -->
+        <form>
+            <div class="form-group">
+                <label for="employeeID">Employee ID</label>
+                <select class="form-control" id="employeeID">
+                    <!-- Include options for employees -->
+                    <option value="employee1">Employee 1</option>
+                    <option value="employee2">Employee 2</option>
+                    <!-- Add more employee options as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bankID">Bank ID</label>
+                <select class="form-control" id="bankID">
+                    <!-- Include options for banks -->
+                    <option value="bank1">Bank 1</option>
+                    <option value="bank2">Bank 2</option>
+                    <!-- Add more bank options as needed -->
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Map</button>
+        </form>
+    </div>
+    <div class="container mt-4">
+        <h2>Bank-Employee Mapping</h2>
+
+        <!-- Bank Selection Dropdown -->
+        <div class="form-group">
+            <label for="bankID">Select a Bank</label>
+            <select class="form-control" id="bankID">
+                <!-- Include options for banks -->
+                <option value="bank1">Bank 1</option>
+                <option value="bank2">Bank 2</option>
+                <!-- Add more bank options as needed -->
+            </select>
+        </div>
+
+        <!-- Employee Table -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                </tr>
+            </thead>
+            <tbody id="employeeList">
+                <!-- Employee data will be populated here based on the selected bank -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // JavaScript to update employee list when bank selection changes
+        document.getElementById("bankID").addEventListener("change", function() {
+            var selectedBank = this.value;
+            var employeeList = document.getElementById("employeeList");
+
+            // Clear previous employee list
+            employeeList.innerHTML = "";
+
+            // Fake data for testing with two banks
+            var fakeData = {
+                "bank1": [
+                    { employeeID: "E001", employeeName: "John Doe" },
+                    { employeeID: "E002", employeeName: "Jane Smith" },
+                ],
+                "bank2": [
+                    { employeeID: "E003", employeeName: "Bob Johnson" },
+                    { employeeID: "E004", employeeName: "Alice Brown" },
+                ]
+            };
+
+            // Populate the employeeList with fake data based on the selected bank
+            fakeData[selectedBank].forEach(employee => {
+                var row = document.createElement("tr");
+                var employeeIDCell = document.createElement("td");
+                employeeIDCell.textContent = employee.employeeID;
+                var employeeNameCell = document.createElement("td");
+                employeeNameCell.textContent = employee.employeeName;
+                row.appendChild(employeeIDCell);
+                row.appendChild(employeeNameCell);
+                employeeList.appendChild(row);
+            });
+        });
+    </script>
+
+</body>
+</html>

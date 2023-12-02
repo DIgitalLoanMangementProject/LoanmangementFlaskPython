@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles for centering the form */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        
+    </style>
+    <!-- CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+<!-- JavaScript -->
+<!-- Full jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flash-messages>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg  navbar-custom bg-dark">
+        <a class="navbar-brand" href="#">OOD Bank</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('loanapplications')}}"><i class="fas fa-money-bill-wave"></i>Apply Loans</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Welcome, User : {{current_user.name}}</h2>
+                <p>We're glad to have you here!</p>
+                <h3>Current Applications</h3>
+                <table class="table table-striped table-bordered" id="loanTable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Application ID</th>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">Loan Type</th>
+                        <th scope="col">Bank Name</th>
+                        <th scope="col">Interest</th>
+                        <th scope="col">Loan Status</th>
+                        <th scope="col">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for loan_detail, bank_name in user_loan_details %}
+                      <tr>
+                        <td>{{ loan_detail.applicationID }}</td>
+                        <td>{{ loan_detail.customerID }}</td>
+                        <td>{{ loan_detail.loanType }}</td>
+                        <td>{{ bank_name }}</td>
+                        <td>{{ loan_detail.interest }}</td>
+                        <td>{{ loan_detail.loanStatus }}</td>
+                        <td>{{ loan_detail.amount }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  
+                  
+                  
+            </div>
+            <div class="col-md-4">
+                <h3>You can do</h3>
+                <ul>
+                    <li>
+                        <a class="nav-link" href="{{ url_for('loanapplications')}}">Apply for a New Loan</a>                        
+                    </li>
+                    <li>View Application Status</li>
+                    <li>Profile Settings</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery (make sure to include them at the bottom of the body) -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $('#loanTable').DataTable();
+    });
+    </script>
+</body>
+</html>

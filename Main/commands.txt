@@ -1,0 +1,16 @@
+python3 -m Enduseraccess.LoansystemHome
+
+
+// admin logins
+sindhu pisachi
+a      a
+
+// customer logins
+raj   abc
+raj   0615
+
+//employee logins
+a1 abc
+
+
+python3 -m Flasksrc.main

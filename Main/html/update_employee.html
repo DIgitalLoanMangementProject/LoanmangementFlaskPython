@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOD project Update Employee Details</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flash-messages>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h2>Update Employee Details</h2>
+
+        <form method="POST">
+            {{ employee_form.hidden_tag() }}  {# Add this to include CSRF token #}
+            <div class="form-group">
+                {{ employee_form.empID.label }}
+                {{ employee_form.empID(class="form-control", readonly="readonly") }}
+            </div>
+            <div class="form-group">
+                {{ employee_form.empName.label }}
+                {{ employee_form.empName(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ employee_form.empAddress.label }}
+                {{ employee_form.empAddress(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ employee_form.emailaddress.label }}
+                {{ employee_form.emailaddress(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ employee_form.bank.label }}
+                {{ employee_form.bank(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ employee_form.username.label }}
+                {{ employee_form.username(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ employee_form.password.label }}
+                {{ employee_form.password(class="form-control") }}
+            </div>
+            <button type="submit" class="btn btn-primary">Update Employee</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

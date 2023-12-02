@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flash-messages>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Add Employee</a>
+        <!-- Include your navigation links here -->
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Add New Employee</h2>
+        <form>
+            <div class="form-group">
+                <label for="employeeID">Employee ID</label>
+                <input type="text" class="form-control" id="employeeID" placeholder="E001">
+            </div>
+            <div class="form-group">
+                <label for="employeeName">Employee Name</label>
+                <input type="text" class="form-control" id="employeeName" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="employeeAddress">Employee Address</label>
+                <input type="text" class="form-control" id="employeeAddress" placeholder="123 Main St, City">
+            </div>
+            <div class="form-group">
+                <label for="employeeEmail">Email Address</label>
+                <input type="email" class="form-control" id="employeeEmail" placeholder="johndoe@example.com">
+            </div>
+            <div class="form-group">
+                <label for="bankID">Bank ID</label>
+                <input type="text" class="form-control" id="bankID" placeholder="B001">
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="johndoe">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Employee</button>
+        </form>
+        
+        <!-- Include Bootstrap JS and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>
+</body>
+</html>

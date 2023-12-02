@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flash-messages>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Welcome, Admin!</h2>
+
+        <div class="alert alert-success" role="alert">
+            You are logged in as an admin.
+        </div>
+        
+        <div class="list-group">
+            <a href="#bankCollapse" class="list-group-item list-group-item-action" data-toggle="collapse" aria-expanded="false" aria-controls="bankCollapse">
+                1. Add a New Bank
+            </a>
+            <div class="collapse" id="bankCollapse">
+                <div class="card card-body">
+                    <!-- Bank form -->
+                    <form method="POST" action="{{ url_for('add_bank') }}">
+                        {{ bankCreateform.hidden_tag() }}  {# Add this to include CSRF token #}
+                        <div class="form-group">
+                            {{ bankCreateform.bankID.label }}
+                            {{ bankCreateform.bankID(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ bankCreateform.bankName.label }}
+                            {{ bankCreateform.bankName(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ bankCreateform.address.label }}
+                            {{ bankCreateform.address(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ bankCreateform.mobileno.label }}
+                            {{ bankCreateform.mobileno(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ bankCreateform.email_adress.label }}
+                            {{ bankCreateform.email_adress(class="form-control") }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Bank</button>
+                    </form>
+                </div>
+            </div>
+            <a href="#updateBankCollapse" class="list-group-item list-group-item-action" data-toggle="collapse" aria-expanded="false" aria-controls="updateBankCollapse">
+                2. Update/Delete Bank Details
+            </a>
+            <div class="collapse" id="updateBankCollapse">
+                <div class="card card-body">
+                    <!-- Table of bank details -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Bank ID</th>
+                                <th>Bank Name</th>
+                                <th>Address</th>
+                                <th>Mobile No</th>
+                                <th>Email Address</th>
+                                <th>Action</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bank in banks %}
+                            <tr>
+                                <td>{{ bank.bankID }}</td>
+                                <td>{{ bank.bankName }}</td>
+                                <td>{{ bank.address }}</td>
+                                <td>{{ bank.mobileno }}</td>
+                                <td>{{ bank.email_adress }}</td>
+                                <td>
+                                    <!-- Button to update bank -->
+                                    <!-- url_for('update_bank', bank_id=bank.bankID) -->
+                                    <a href="{{url_for('update_bank', bank_id=bank.bankID)}}" class="btn btn-sm btn-primary">
+                                        Update
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{url_for('delete_bank', bankid=bank.bankID)}}" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <a href="#employeeCollapse" class="list-group-item list-group-item-action" data-toggle="collapse" aria-expanded="false" aria-controls="employeeCollapse">
+                3. Add Employee
+            </a>
+            <div class="collapse" id="employeeCollapse">
+                <div class="card card-body">
+                    <form method="POST" action="{{ url_for('add_employee') }}">
+                        {{ employee_form.hidden_tag() }}
+                        <!-- Employee Form fields -->
+                        <div class="form-group">
+                            {{ employee_form.empID.label }} {{ employee_form.empID(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ employee_form.empName.label }} {{ employee_form.empName(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ employee_form.empAddress.label }} {{ employee_form.empAddress(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ employee_form.emailaddress.label }} {{ employee_form.emailaddress(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ employee_form.bank.label }} {{ employee_form.bank(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ employee_form.username.label }} {{ employee_form.username(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ employee_form.password.label }} {{ employee_form.password(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            {{ employee_form.submit() }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <a href="#updateEmployeeCollapse" class="list-group-item list-group-item-action" data-toggle="collapse" aria-expanded="false" aria-controls="updateEmployeeCollapse">
+                3. Update/Delete Employee Details
+            </a>
+            <div class="collapse" id="updateEmployeeCollapse">
+                <div class="card card-body">
+                    <!-- Table of employee details -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Employee Name</th>
+                                <th>Address</th>
+                                <th>Email Address</th>
+                                <th>Bank</th>
+                                <th>Username</th>
+                                <th>Action</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for employee in emps %}
+                            <tr>
+                                <td>{{ employee.empID }}</td>
+                                <td>{{ employee.empName }}</td>
+                                <td>{{ employee.empAddress }}</td>
+                                <td>{{ employee.emailaddress }}</td>
+                                <td>{{ employee.bank.bankName }}</td>
+                                <td>{{ employee.username }}</td>
+                                <td>
+                                    <!-- Button to update employee -->
+                                    <!-- url_for('update_employee', employee_id=employee.empID) -->
+                                    <a href="{{url_for('update_employee', emp_id=employee.empID)}}" class="btn btn-sm btn-primary">Update</a>
+                                </td>
+                                <td>
+                                    <a href="{{url_for('delete_emp', empID=employee.empID)}}" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

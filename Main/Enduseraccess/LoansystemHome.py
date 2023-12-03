@@ -18,8 +18,6 @@ class LoanSystemHome:
 
     def run(self):
         try:
-            
-
             while True:
                 self.loan_home.loan_menu()
                 choice = int(input("Please enter the option: "))

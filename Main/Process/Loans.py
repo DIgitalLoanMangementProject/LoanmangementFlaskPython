@@ -121,7 +121,7 @@ class VehicleLoan(LoanDec):
         self.dml = dml
         self.drl = drl
 
-    def apply_loan(self, con, st, customer_id, bank_id, amount):
+    def apply_loan(self, st, customer_id, bank_id, amount):
         loan_type = "Vehicle Loan"
         application_id = self.drl.generate_loan_id(st)
         interest_rate = "12.5"
